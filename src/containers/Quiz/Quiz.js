@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Quiz.module.css';
+import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 
 
 class Quiz extends React.Component{
@@ -12,9 +13,12 @@ class Quiz extends React.Component{
 
         return(
             <div className={classes.Quiz}>
-                <h1>QUIZ</h1>
-            </div>
 
+                <div className={classes.QuizWrapper}>
+                    <h1>QUIZ</h1>
+                    <ActiveQuiz/>
+                </div>
+            </div>
         );
     }
 }
