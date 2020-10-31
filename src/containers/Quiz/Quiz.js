@@ -7,7 +7,28 @@ class Quiz extends React.Component{
     //основной контейнер для отрисовки тестового поля
 
     state={
-        quiz: [],
+        quiz: [
+            { 
+                question: "Вопрос1?",
+                answers : [
+                    {text: "Ответ1_1"},
+                    {text: "Ответ1_2"},
+                    {text: "Ответ1_3"},
+                    {text: "Ответ1_4"},
+                ],
+                tryAnswer: 3
+            },
+            {
+                question: "Вопрос2?",
+                answers:[
+                    {text: "Ответ2_1"},
+                    {text: "Ответ2_2"},
+                    {text: "Ответ2_3"},
+                    {text: "Ответ2_4"}
+                ],
+                tryAnswer: 3
+            }
+        ]
     }
     render(){
 
@@ -16,7 +37,7 @@ class Quiz extends React.Component{
 
                 <div className={classes.QuizWrapper}>
                     <h1>QUIZ</h1>
-                    <ActiveQuiz/>
+                    <ActiveQuiz quiz={this.state.quiz[0]} />
                 </div>
             </div>
         );
