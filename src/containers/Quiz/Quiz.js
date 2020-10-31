@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
+import AnswerItem from '../../components/ActiveQuiz/AnswersList/AnswerItem/AnswerItem';
 
 
 class Quiz extends React.Component{
@@ -11,25 +12,32 @@ class Quiz extends React.Component{
             { 
                 question: "Вопрос1?",
                 answers : [
-                    {text: "Ответ1_1"},
-                    {text: "Ответ1_2"},
-                    {text: "Ответ1_3"},
-                    {text: "Ответ1_4"},
+                    {text: "Ответ1_1", ansId:1},
+                    {text: "Ответ1_2", ansId:2},
+                    {text: "Ответ1_3", ansId:3},
+                    {text: "Ответ1_4", ansId:4},
                 ],
-                tryAnswer: 3
+                tryAnswerId: 3
             },
             {
                 question: "Вопрос2?",
                 answers:[
-                    {text: "Ответ2_1"},
-                    {text: "Ответ2_2"},
-                    {text: "Ответ2_3"},
-                    {text: "Ответ2_4"}
+                    {text: "Ответ2_1", ansId:1},
+                    {text: "Ответ2_2", ansId:2},
+                    {text: "Ответ2_3", ansId:3},
+                    {text: "Ответ2_4", ansId:4}
                 ],
-                tryAnswer: 3
+                tryAnswerId: 3
             }
         ]
     }
+
+
+    onAnswerClickHAndler = (answerId) => {
+        console.log(answerId);
+    }
+
+
     render(){
 
         return(
@@ -37,7 +45,10 @@ class Quiz extends React.Component{
 
                 <div className={classes.QuizWrapper}>
                     <h1>QUIZ</h1>
-                    <ActiveQuiz quiz={this.state.quiz[0]} />
+                    <ActiveQuiz 
+                        quiz={this.state.quiz[0]}
+                        onAnswerClick= {this.onAnswerClickHAndler} 
+                    />
                 </div>
             </div>
         );
