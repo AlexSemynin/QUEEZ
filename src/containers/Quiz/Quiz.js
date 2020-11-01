@@ -37,6 +37,10 @@ class Quiz extends React.Component{
 
     OnAnswerClickHAndler = (answerId) => {
 
+        if(this.state.answerState){
+            return;
+        }
+
         if(answerId == this._GetCurrentQuiz().tryAnswerId){
             this.setState({
                 answerState: {[answerId]: 'success'}
