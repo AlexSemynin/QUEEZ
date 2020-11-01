@@ -13,6 +13,7 @@ const AnswersList = props =>{
                             key={index}
                             answer={answer}
                             onAnswerClick = {props.onAnswerClick}
+                            state = {props.answerState ? props.answerState[answer.ansId] : null}
                         />)
                 })               
             }

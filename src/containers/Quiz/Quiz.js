@@ -7,54 +7,89 @@ class Quiz extends React.Component{
     //основной контейнер для отрисовки тестового поля
 
     state={
-        answerNumber: 0,
+        quizNumber: 0,
+        answerState: null, //{currentAnswerId: 'error'}
         quiz: [
             { 
-                questionId: 1,
-                question: "Вопрос1?",
+                questionId: 0,
+                question: "Какого цвета небо?",
                 answers : [
-                    {text: "Ответ1_1", ansId:1},
-                    {text: "Ответ1_2", ansId:2},
-                    {text: "Ответ1_3", ansId:3},
-                    {text: "Ответ1_4", ansId:4},
+                    {text: "any", ansId:0},
+                    {text: "grey", ansId:1},
+                    {text: "black", ansId:2},
+                    {text: "blue", ansId:3},
                 ],
-                tryAnswerId: 3
+                tryAnswerId: 0
             },
             {
-                questionId: 2,
-                question: "Вопрос2?",
+                questionId: 1,
+                question: "В каком году основали Питер?",
                 answers:[
-                    {text: "Ответ2_1", ansId:1},
-                    {text: "Ответ2_2", ansId:2},
-                    {text: "Ответ2_3", ansId:3},
-                    {text: "Ответ2_4", ansId:4}
+                    {text: "1700", ansId:0},
+                    {text: "1701", ansId:1},
+                    {text: "1702", ansId:2},
+                    {text: "1703", ansId:3}
                 ],
-                tryAnswerId: 1
+                tryAnswerId: 3
             }
         ]
     }
 
+    OnAnswerClickHAndler = (answerId) => {
 
-    onAnswerClickHAndler = (answerId) => {
-        this.setState({
-            answerNumber: this.state.answerNumber + 1
-        });
+        if(answerId == this._GetCurrentQuiz().tryAnswerId){
+            this.setState({
+                answerState: {[answerId]: 'success'}
+            });
+        }else{
+            this.setState({
+                answerState: {[answerId]: 'error'}
+            });
+        }
+
+        if(this._IsLastQuiz()){
+            console.log("Finish");
+        }else{
+
+            const timer = window.setTimeout(() => {
+                
+                this.setState({
+                    quizNumber: this.state.quizNumber + 1,
+                    answerState: null
+                });
+
+                window.clearTimeout(timer); //чтобы не было утечки памяти
+            }, 1000);
+        }
     }
 
+    _IsTrueAnswer(quiz, answId){
+        return quiz.tryAnswerId === answId;
+    }
+
+    _GetCurrentQuiz = () =>{
+        return this.state.quiz[this.state.quizNumber];
+    } 
+    _IsLastQuiz = () => {
+        return this.state.quizNumber === this.state.quiz.length-1;
+    }
+
+    
 
     render(){
 
-        const answerNumber = this.state.answerNumber;
+        const quizNumber = this.state.quizNumber;
         return(
             <div className={classes.Quiz}>
 
                 <div className={classes.QuizWrapper}>
                     <h1>QUIZ</h1>
                     <ActiveQuiz 
-                        quiz = {this.state.quiz[answerNumber]}
-                        onAnswerClick = {this.onAnswerClickHAndler}
-                        answerNumber = {answerNumber}
+                        quiz = {this.state.quiz[quizNumber]}
+                        onAnswerClick = {this.OnAnswerClickHAndler}
+                        quizNumber = {quizNumber}
                         quizCount = {this.state.quiz.length}
+                        answerState = {this.state.answerState}
                     />
                 </div>
             </div>
