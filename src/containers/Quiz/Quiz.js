@@ -9,10 +9,11 @@ class Quiz extends React.Component{
 
     state={
         quizNumber: 0,
-        answerState: null, //{currentAnswerId: 'error'}
+        answerState: null, //{{currentAnswerId}: 'error'}
+        results: [], //{key:quizId, result: "error" || success}
+        isFinised: false,
         quiz: [
             {
-                isFinised: false,
                 questionId: 0,
                 question: "Какого цвета небо?",
                 answers : [
@@ -40,27 +41,22 @@ class Quiz extends React.Component{
     OnAnswerClickHAndler = (answerId) => {
 
         if(this.state.answerState){
+            //не воспринимать второй клик пока асинк таймер
             return;
         }
 
-        if(answerId == this._GetCurrentQuiz().tryAnswerId){
-            this.setState({
-                answerState: {[answerId]: 'success'}
-            });
-        }else{
-            this.setState({
-                answerState: {[answerId]: 'error'}
-            });
-        }
+        //логика проверки ответа: для показать клиенту, зафиксировать ответ
+        this._CheckAndRemember(answerId);
 
+        //логика переключения вопросов
         if(this._IsLastQuiz()){
             const timer = window.setTimeout(()=>{
                 this.setState({
                     isFinised: true
                 });
+                window.clearTimeout(timer);
             }, 1000);
         }else{
-
             const timer = window.setTimeout(() => {
                 
                 this.setState({
@@ -71,6 +67,24 @@ class Quiz extends React.Component{
                 window.clearTimeout(timer); //чтобы не было утечки памяти
             }, 1000);
         }
+    }
+
+    _CheckAndRemember = (answerId) =>{
+        const result = answerId === this._GetCurrentQuiz().tryAnswerId ? 
+            "success" :
+            "error";
+        const results = this.state.results.concat();//[...this.state.results];
+        results.push({
+            "key":this._GetCurrentQuiz().questionId,
+            "result": result
+        }); //Создать модель сосотяния ответа на вопрос
+
+        this.setState((prevState) => {
+            return{
+                answerState: {[answerId]: result},
+                results: results
+            }
+        });
     }
 
     _IsTrueAnswer(quiz, answId){
@@ -97,7 +111,8 @@ class Quiz extends React.Component{
                     {
                         this.state.isFinised ?
                             <FinishedQuiz
-                            
+                                results = {this.state.results}
+                                quizs = {this.state.quiz}
                             />
                             :
                             <ActiveQuiz 
