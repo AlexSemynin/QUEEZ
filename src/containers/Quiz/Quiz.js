@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
+import FinishedQuiz from '../../components/FinisedQuiz/FinisedQuiz';
 
 
 class Quiz extends React.Component{
@@ -10,7 +11,8 @@ class Quiz extends React.Component{
         quizNumber: 0,
         answerState: null, //{currentAnswerId: 'error'}
         quiz: [
-            { 
+            {
+                isFinised: false,
                 questionId: 0,
                 question: "Какого цвета небо?",
                 answers : [
@@ -52,7 +54,11 @@ class Quiz extends React.Component{
         }
 
         if(this._IsLastQuiz()){
-            console.log("Finish");
+            const timer = window.setTimeout(()=>{
+                this.setState({
+                    isFinised: true
+                });
+            }, 1000);
         }else{
 
             const timer = window.setTimeout(() => {
@@ -83,18 +89,25 @@ class Quiz extends React.Component{
     render(){
 
         const quizNumber = this.state.quizNumber;
+
         return(
             <div className={classes.Quiz}>
-
                 <div className={classes.QuizWrapper}>
                     <h1>QUIZ</h1>
-                    <ActiveQuiz 
-                        quiz = {this.state.quiz[quizNumber]}
-                        onAnswerClick = {this.OnAnswerClickHAndler}
-                        quizNumber = {quizNumber}
-                        quizCount = {this.state.quiz.length}
-                        answerState = {this.state.answerState}
-                    />
+                    {
+                        this.state.isFinised ?
+                            <FinishedQuiz
+                            
+                            />
+                            :
+                            <ActiveQuiz 
+                                quiz = {this.state.quiz[quizNumber]}
+                                onAnswerClick = {this.OnAnswerClickHAndler}
+                                quizNumber = {quizNumber}
+                                quizCount = {this.state.quiz.length}
+                                answerState = {this.state.answerState}
+                            />
+                    }
                 </div>
             </div>
         );
