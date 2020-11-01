@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+::-webkit-scrollbar{
+  /* Ширина дорожки */
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  /* цвет дорожки */
+  background-color: #7969e6;
+}
+
+::-webkit-scrollbar-thumb {
+  /* цвет ползунка */
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background-color:#26343579;
+}
