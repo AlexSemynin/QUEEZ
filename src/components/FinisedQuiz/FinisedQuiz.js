@@ -30,9 +30,10 @@ const FinisedQuiz = (props) => {
                 })
             }
             </ul>
-            
-            <p>правильно {trueAnswersCount} из {props.results.length}</p>
-            <button>Повторить</button>
+
+            <p>Правильно {trueAnswersCount} из {props.results.length}</p>
+            <button onClick={props.onTryAgain.bind()}>Повторить</button>
+            {/* Можно и без bind() */}
         </div>
     )
 }

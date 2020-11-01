@@ -69,6 +69,15 @@ class Quiz extends React.Component{
         }
     }
 
+    TryAgain = () => {
+        this.setState({
+            quizNumber: 0,
+            isFinised: false,
+            answerState: null,
+            results:[]
+        });
+    }
+
     _CheckAndRemember = (answerId) =>{
         const result = answerId === this._GetCurrentQuiz().tryAnswerId ? 
             "success" :
@@ -113,6 +122,7 @@ class Quiz extends React.Component{
                             <FinishedQuiz
                                 results = {this.state.results}
                                 quizs = {this.state.quiz}
+                                onTryAgain = {this.TryAgain}
                             />
                             :
                             <ActiveQuiz 
