@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../UI/Button/Button';
 import classes from './FinisedQuiz.module.css'
 
 const FinisedQuiz = (props) => {
@@ -32,7 +33,10 @@ const FinisedQuiz = (props) => {
             </ul>
 
             <p>Правильно {trueAnswersCount} из {props.results.length}</p>
-            <button onClick={props.onTryAgain.bind()}>Повторить</button>
+            <Button 
+                onClick={props.onTryAgain}
+                type="primary"
+            >Повторить</Button>
             {/* Можно и без bind() */}
         </div>
     )
