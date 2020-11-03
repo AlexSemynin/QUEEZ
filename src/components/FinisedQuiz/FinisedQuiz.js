@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../UI/Button/Button';
 import classes from './FinisedQuiz.module.css'
 
@@ -38,6 +39,14 @@ const FinisedQuiz = (props) => {
                 type="primary"
             >Повторить</Button>
             {/* Можно и без bind() */}
+
+            <Link to='/'>
+                <Button
+                    type={"success"}
+                >
+                    Вернуться в список тестов
+                </Button>
+            </Link>
         </div>
     )
 }

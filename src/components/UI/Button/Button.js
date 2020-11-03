@@ -13,7 +13,7 @@ const Button = (props) =>{
 
 
         <button
-            onClick={props.onClick.bind()}
+            onClick={props.onClick?.bind()}
             className={cls.join(' ')}
             disabled={props.disabled}
         >
