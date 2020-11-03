@@ -22,6 +22,7 @@ class Layout extends React.Component{
 
                 <Drawer
                     isOpen={this.state.isOpen}
+                    onClose={this.onToggleHandler}
                 />
                 <MenuToggle
                     onMenuToggle={this.onToggleHandler}

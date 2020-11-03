@@ -1,4 +1,5 @@
 import React from 'react';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 import classes from './Drawer.module.css';
 
 const links = [1,2,3];
@@ -29,11 +30,21 @@ class Drawer extends React.Component{
         }
 
         return(
-            <nav className={cls.join(' ')}>
-                <ul>
-                    {this.RenderLinks()}
-                </ul>
-            </nav>
+            <React.Fragment>
+                <nav className={cls.join(' ')}>
+                    <ul>
+                        {this.RenderLinks()}
+                    </ul>
+                </nav>
+                {
+                    this.props.isOpen ? 
+                        <Backdrop
+                            onClose={this.props.onClose}
+                        />
+                        :
+                        null
+                }
+            </React.Fragment>
         )
     }
 }
