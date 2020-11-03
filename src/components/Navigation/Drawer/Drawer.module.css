@@ -33,3 +33,7 @@
     cursor: pointer;
     user-select: none;
 }
+
+.activeLi{
+    color: red;
+}
