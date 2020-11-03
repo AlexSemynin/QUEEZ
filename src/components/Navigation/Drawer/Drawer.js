@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import classes from './Drawer.module.css';
-import {Route, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const links = [
     {to: '/', label:'Список', exact: true},
