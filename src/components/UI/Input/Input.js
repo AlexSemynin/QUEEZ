@@ -9,10 +9,13 @@ const Input = (props) => {
     ];
     const htmlFor = `${inputType}-${Math.random()}`;
 
-    function IsValid(){
-        return true;
+    function IsInvalid({valid, toched, shouldValidate }){
+        return !valid && toched && shouldValidate;
     }
 
+    if(IsInvalid(props)){
+        cls.push(classes.IsInvalid)
+    }
 
     return(
         <div className={cls.join(' ')}>
@@ -24,8 +27,9 @@ const Input = (props) => {
                 value={props.value}
             />
             {
-                IsValid() ? null : 
-                    <span>{props.invalidText}</span>
+                IsInvalid(props) ? 
+                    <span>{props.invalidText || "Введите верное значение"}</span>
+                    : null
             }
         </div>
     )
