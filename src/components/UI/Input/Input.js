@@ -23,7 +23,7 @@ const Input = (props) => {
             <input
                 id={htmlFor}
                 type={inputType}
-                onChange={props.onChange?.bind()}
+                onChange={props.onChange}
                 value={props.value}
             />
             {
