@@ -2,11 +2,16 @@
     margin-bottom: 15px;
 }
 
+.Input h1{
+    user-select: none;
+}
+
 .Input label{
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
     padding: 0;
+    user-select: none;
 }
 
 .Input input{
