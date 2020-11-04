@@ -6,6 +6,7 @@ import Input from '../../components/UI/Input/Input';
 export default class Auth extends React.Component{
 
     state = {
+        isFormValid: false,
         formControls:{
             email:{
                 value: '',
@@ -36,6 +37,7 @@ export default class Auth extends React.Component{
 
     submitAuth = ev =>{
         ev.preventDefault();
+
     }
 
     loginHandler = ()=>{
@@ -72,8 +74,17 @@ export default class Auth extends React.Component{
         control.value = ev.target.value;
         control.valid = this.IsValidControl(ev.target.value, control.validation);
         
+        
+        const isAllControlValid = Object.keys(this.state.formControls).every(controlName => {
+            const control = this.state.formControls[controlName]
+            return control.valid;
+        });
+
+
+
         this.setState({
-            formControls: formControls
+            formControls: formControls,
+            isFormValid: isAllControlValid
         })
     }
 
@@ -96,6 +107,8 @@ export default class Auth extends React.Component{
         return isValid;
     }
 
+    IsAllControl
+
     render(){
 
         return(
@@ -109,10 +122,12 @@ export default class Auth extends React.Component{
                             <Button
                                 type="success"
                                 onClick={this.loginHandler}
+                                disabled={!this.state.isFormValid}
                             >Авторизоваться</Button>
                             <Button
                                 type="primary"
                                 onClick={this.registerHandler}
+                                disabled={!this.state.isFormValid}
                             >Зарегистрироваться</Button>
                         </div>
                     </form>
